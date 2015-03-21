@@ -44,11 +44,11 @@ XBMC HUB: j.mp/xbmctorrent]]></description>
     </extension>
 </addon>
 
-<addon id="repository.xbmc-vadim" name="Vadim's repository" version="1.0.0" provider-name="Vadim Brook">
+<addon id="repository.xbmc-vadim" name="Vadim's repository" version="1.0.1" provider-name="Vadim Brook">
     <extension point="xbmc.addon.repository" name="Kodi Vadim's repository">
         <info compressed="false">https://raw.githubusercontent.com/vadimbrk/xbmc-vadim/master/addons.xml</info>
         <checksum>https://raw.githubusercontent.com/vadimbrk/xbmc-vadim/master/addons.xml.md5</checksum>
-        <datadir zip="true">https://raw.githubusercontent.com/vadimbrk/xbmc-vadim/master/repo</datadir>
+	<datadir zip="true">https://github.com/vadimbrk/xbmc-vadim/raw/master/repo/</datadir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>Vadim's repository</summary>
