@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.video.dom2" name="Dom 2 Add-on" version="1.0.1" provider-name="Vadim Brook">
+<addon id="plugin.video.dom2" name="Dom 2 Add-on" version="1.0.2" provider-name="Vadim Brook">
   <requires>
       <import addon="xbmc.python" version="2.1.0"/>
   </requires>

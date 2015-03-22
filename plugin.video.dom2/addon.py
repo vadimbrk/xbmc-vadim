@@ -7,7 +7,7 @@ import unicodedata
 
 ADDON = xbmcaddon.Addon(id='plugin.video.dom2')
 ADDON_ID = 'plugin.video.dom2'
-WEB_PAGE_BASE = 'http://nash-dom2.ru/page/1/'
+WEB_PAGE_BASE = 'http://video-dom2.ru/onlinetv/'
 
 __plugin__ = "Dom2 Add-on"
 __author__ = "Vadim Brook"
@@ -20,33 +20,20 @@ def playVideo(params):
 	response = urllib2.urlopen(params['video'])
 	if response and response.getcode() == 200:
 		content = response.read()
-		videoLink = util.extract(content, '"]="', '"')
+		videoLink = util.extract(content, 'file:"', '"')
 		util.playMedia(params['title'], params['image'], videoLink, 'Video')
-	else:
-		util.showError(ADDON_ID, 'Could not open URL %s to get video information' % (params['video']))
 
 def buildMenu():
-	url = WEB_PAGE_BASE 
+	url = WEB_PAGE_BASE + 'tv_rec.php'
 	response = urllib2.urlopen(url)
 	if response and response.getcode() == 200:
 		content = response.read()
-		videos = util.extractAll(content, '<div class="post-head">', '</div>')
+		videos = util.extractAll(content, '<td class="td_ser">', '</td>')
 		for video in videos:
 			params = {'play':1}
-			diplink = util.extract(video, 'a href="', '\"')
-			response = urllib2.urlopen(diplink)
-			if response and response.getcode() == 200:
-				content = response.read()
-				page = util.extractAll(content,'<iframe src="','"')
-				for links in page:
-					test = util.extract(links, 'http://','.tv')
-					if test == 'veterok':
-						videoUrl = links
-				
-			params['video'] = videoUrl
-			icon = videoUrl + 'xx'
-			params['image'] = 'http://veterok.tv/thumb/' +str(util.extract(icon,'http://veterok.tv/v/','xx')) +'.jpg'
-			params['title'] = util.extract(video, '>', '</a>').decode('windows-1251').encode('utf-8')
+			params['video'] = WEB_PAGE_BASE + util.extract(video, '<a  href="', '"')
+			params['image'] = ""
+			params['title'] = util.extract(video, 'title="', '"').decode('windows-1251').encode('utf-8')
 			link = util.makeLink(params)
 			util.addMenuItem(params['title'], link, 'DefaultVideo.png', params['image'], False)
 		util.endListing()
